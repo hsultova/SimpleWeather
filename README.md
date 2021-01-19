@@ -1,2 +1,2 @@
 # SimpleWeather
- Simple Weather App using AccWeather API
+ Simple Weather App using AccuWeather API https://developer.accuweather.com/
