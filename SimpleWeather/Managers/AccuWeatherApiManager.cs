@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SimpleWeather.Models;
+using SimpleWeather.Managers.Abstract;
 
 namespace SimpleWeather.Managers
 {
 	/// <summary>
 	/// Manager of the AccuWeather API: https://developer.accuweather.com/ 
 	/// </summary>
-	public class AccuWeatherApiManager
+	public class AccuWeatherApiManager : IWeatherAPI
 	{
 		private const string APIKey = "Otay7F6VdaA37HnpBTvOw5L6TShqWfQj";
 		private const string BaseUrl = @"http://dataservice.accuweather.com";
@@ -21,17 +19,14 @@ namespace SimpleWeather.Managers
 		/// </summary>
 		/// <param name="query">Name of the city</param>
 		/// <returns>Returns all the cities with that or similar name</returns>
-		public static async Task<List<City>> GetCities(string query)
+		public async Task<HttpResponseMessage> GetCities(string query)
 		{
-			List<City> cities = new List<City>();
 			using (var client = new HttpClient())
 			{
 				string url = BaseUrl + string.Format(AutoCompleteEndpoint, APIKey, query);
 				var response = await client.GetAsync(url);
-				var json = await response.Content.ReadAsStringAsync();
-				cities = JsonConvert.DeserializeObject<List<City>>(json);
+				return response;
 			}
-			return cities;
 		}
 
 		/// <summary>
@@ -39,17 +34,14 @@ namespace SimpleWeather.Managers
 		/// </summary>
 		/// <param name="key">Location key</param>
 		/// <returns>Returns daily forecast data for a specific location</returns>
-		public static async Task<DailyForecastOneDay> GetDailyForecastOneDay(string key)
+		public async Task<HttpResponseMessage> GetDailyForecastOneDay(string key)
 		{
-			DailyForecastOneDay forecast;
 			using (var client = new HttpClient())
 			{
 				string url = BaseUrl + string.Format(DailyForecastsEndpoint, key, APIKey);
 				var response = await client.GetAsync(url);
-				var json = await response.Content.ReadAsStringAsync();
-				forecast = JsonConvert.DeserializeObject<DailyForecastOneDay>(json);
+				return response;
 			}
-			return forecast;
 		}
 	}
 }
