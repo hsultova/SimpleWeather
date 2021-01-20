@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Managers\Abstract\IWeatherAPI.cs" />
     <Compile Include="Managers\AccuWeatherApiManager.cs" />
     <Compile Include="Models\DailyForecast.cs" />
     <Compile Include="Models\DailyForecastOneDay.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\Headline.cs" />
     <Compile Include="Models\Temperature.cs" />
     <Compile Include="Models\TemperatureScale.cs" />
+    <Compile Include="Utils\Events\DisplayMessage.cs" />
     <Compile Include="Utils\General\RelayCommand.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
@@ -119,14 +121,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\01-s.png" />
-    <Resource Include="Images\02-s.png" />
-    <Resource Include="Images\03-s.png" />
-    <Resource Include="Images\04-s.png" />
-    <Resource Include="Images\05-s.png" />
-    <Resource Include="Images\06-s.png" />
-    <Resource Include="Images\07-s.png" />
-    <Resource Include="Images\08-s.png" />
+    <Resource Include="Images\1-s.png" />
+    <Resource Include="Images\2-s.png" />
+    <Resource Include="Images\3-s.png" />
+    <Resource Include="Images\4-s.png" />
+    <Resource Include="Images\5-s.png" />
+    <Resource Include="Images\6-s.png" />
+    <Resource Include="Images\7-s.png" />
+    <Resource Include="Images\8-s.png" />
     <Resource Include="Images\11-s.png" />
     <Resource Include="Images\12-s.png" />
     <Resource Include="Images\13-s.png" />
@@ -159,6 +161,9 @@
     <Resource Include="Images\42-s.png" />
     <Resource Include="Images\43-s.png" />
     <Resource Include="Images\44-s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\accuweather.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
