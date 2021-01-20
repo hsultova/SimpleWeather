@@ -11,5 +11,19 @@
 		<local:MainWindowViewModel/>
 	</Window.DataContext>
 
-	<ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="0.2*"/>
+		</Grid.RowDefinitions>
+		<Label Grid.Row="0" Content="{Binding Error}"></Label>
+		<ContentControl Grid.Row="1"  Content="{Binding CurrentViewModel}"></ContentControl>
+		<Image Grid.Row="2" 
+			   Margin="10" 
+			   Stretch="Uniform"
+			   HorizontalAlignment="Right" 
+			   Source="/Images/accuweather.png"/>
+	</Grid>
+
 </Window>
