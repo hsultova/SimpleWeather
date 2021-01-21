@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using SimpleWeather.Managers;
 using SimpleWeather.Managers.Abstract;
 using SimpleWeather.Models;
+using SimpleWeather.Utils.Events;
 using SimpleWeather.Utils.General;
 using SimpleWeather.ViewModels.Base;
 
@@ -16,9 +18,15 @@ namespace SimpleWeather.ViewModels
 		public ForecastViewModel()
 		{
 			_weatherManager = new AccuWeatherApiManager();
+
+			//TODO Find local region and search by it
+			Query = "Sofia";
+			OnSearch();
 		}
 
 		private IWeatherAPI _weatherManager;
+
+		public ObservableCollection<DailyForecastViewModel> DailyForecasts { get; set; }
 
 		private string _query;
 		public string Query
@@ -48,20 +56,6 @@ namespace SimpleWeather.ViewModels
 			}
 		}
 
-		private DailyForecast _dailyForecast;
-		public DailyForecast DailyForecast
-		{
-			get
-			{
-				return _dailyForecast;
-			}
-			set
-			{
-				_dailyForecast = value;
-				OnPropertyChanged(nameof(DailyForecast));
-			}
-		}
-
 		private Headline _headline;
 		public Headline Headline
 		{
@@ -73,6 +67,20 @@ namespace SimpleWeather.ViewModels
 			{
 				_headline = value;
 				OnPropertyChanged(nameof(Headline));
+			}
+		}
+
+		private CurrentConditions _currentConditions;
+		public CurrentConditions CurrentConditions
+		{
+			get
+			{
+				return _currentConditions;
+			}
+			set
+			{
+				_currentConditions = value;
+				OnPropertyChanged(nameof(CurrentConditions));
 			}
 		}
 
@@ -98,14 +106,14 @@ namespace SimpleWeather.ViewModels
 		private async void OnSearch()
 		{
 			await FillCityData();
+			await FillCurrentConditions();
 			await FillForecastData();
-
-			IconPath = "/SimpleWeather;component/Images/" + DailyForecast.Day.Icon + "-s.png";
 		}
 
 		private async Task FillForecastData()
 		{
-			//var response = await _weatherManager.GetDailyForecastOneDay(SelectedCity?.Key);
+			//var url = _weatherManager.GetDailyForecastOneDayUrl(SelectedCity?.Key);
+			//var response = await _weatherManager.GetRequest(url);
 			//if (response.StatusCode != System.Net.HttpStatusCode.OK)
 			//{
 			//	OnDisplayMessage(new DisplayMessageEventArgs { Message = response.ReasonPhrase, Тype = DisplayMessageType.Error });
@@ -114,20 +122,28 @@ namespace SimpleWeather.ViewModels
 			//var json = await response.Content.ReadAsStringAsync();
 			//var forecast = JsonConvert.DeserializeObject<DailyForecastOneDay>(json);
 
-			DailyForecastOneDay forecast;
+			DailyForecastDays forecastDays;
 			using (System.IO.StreamReader r = new System.IO.StreamReader("forecast_json.json"))
 			{
 				var json = r.ReadToEnd();
-				forecast = JsonConvert.DeserializeObject<DailyForecastOneDay>(json);
+				forecastDays = JsonConvert.DeserializeObject<DailyForecastDays>(json);
 			}
 
-			Headline = forecast.Headline;
-			DailyForecast = forecast.DailyForecasts.FirstOrDefault();
+			Headline = forecastDays.Headline;
+			//DailyForecast = forecast.DailyForecasts.FirstOrDefault();
+
+			List<DailyForecastViewModel> forecastsViewModel = new List<DailyForecastViewModel>();
+			foreach(var forecast in forecastDays.DailyForecasts)
+			{
+				forecastsViewModel.Add(new DailyForecastViewModel(forecast, CurrentConditions));
+			}
+			DailyForecasts = new ObservableCollection<DailyForecastViewModel>(forecastsViewModel);
 		}
 
 		private async Task FillCityData()
 		{
-			//var response = await _weatherManager.GetCities(Query);
+			//var url = _weatherManager.GetCitiesUrl(Query);
+			//var response = await _weatherManager.GetRequest(url);
 			//if (response.StatusCode != System.Net.HttpStatusCode.OK)
 			//{
 			//	OnDisplayMessage(new DisplayMessageEventArgs { Message = response.ReasonPhrase, Тype = DisplayMessageType.Error });
@@ -144,6 +160,29 @@ namespace SimpleWeather.ViewModels
 			}
 
 			SelectedCity = cities.FirstOrDefault();
+		}
+
+		private async Task FillCurrentConditions()
+		{
+			//var url = _weatherManager.GetCurrentConditionsUrl(SelectedCity?.Key);
+			//var response = await _weatherManager.GetRequest(url);
+			//if (response.StatusCode != System.Net.HttpStatusCode.OK)
+			//{
+			//	OnDisplayMessage(new DisplayMessageEventArgs { Message = response.ReasonPhrase, Тype = DisplayMessageType.Error });
+			//}
+
+			//string json = await response.Content.ReadAsStringAsync();
+			//var conditions = JsonConvert.DeserializeObject<List<CurrentConditions>>(json);
+
+			List<CurrentConditions> conditions;
+			using (System.IO.StreamReader r = new System.IO.StreamReader("current_conditions.json"))
+			{
+				var json = r.ReadToEnd();
+				conditions = JsonConvert.DeserializeObject<List<CurrentConditions>>(json);
+			}
+
+			CurrentConditions = conditions.FirstOrDefault();
+			IconPath = "/SimpleWeather;component/Images/" + CurrentConditions.WeatherIcon + "-s.png";
 		}
 	}
 }

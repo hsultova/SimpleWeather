@@ -11,13 +11,15 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="0.3*"></RowDefinition>
 			<RowDefinition Height="0.5*"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="0.5*"></RowDefinition>
+			<RowDefinition Height="0.5*"></RowDefinition>
+			<RowDefinition Height="0.5*"></RowDefinition>
+			<RowDefinition Height="0.2*"></RowDefinition>
+			<RowDefinition Height="2*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="2*"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 
@@ -39,6 +41,39 @@
 					Orientation="Horizontal" 
 					Margin="5">
 			<Image Source="{Binding IconPath}"></Image>
+			<Label Content="{Binding CurrentConditions.Temperature.Metric.Value}"></Label>
+			<Label Content="{Binding CurrentConditions.Temperature.Metric.Unit}"></Label>
 		</StackPanel>
+		<StackPanel Grid.Row="3" Grid.Column="1" 
+					HorizontalAlignment="Center"
+					Orientation="Horizontal" 
+					Margin="5">
+			<Label Content="{Binding CurrentConditions.WeatherText}"></Label>
+		</StackPanel>
+		<StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+			<TextBlock>Updated as of</TextBlock>
+			<Label Content="{Binding CurrentConditions.LocalObservationDateTime}"></Label>
+		</StackPanel>
+		<StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+			<TextBlock>Daily</TextBlock>
+		</StackPanel>
+		<ItemsControl Grid.ColumnSpan="2" Grid.Row="6"  ItemsSource="{Binding DailyForecasts}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<WrapPanel>
+						<TextBlock Text="{Binding DailyForecast.Date}"></TextBlock>
+						<Image Source="{Binding IconPath}"></Image>
+						<TextBlock Text="{Binding DailyForecast.Temperature.Maximum.Value}" Margin="5"/>
+						<TextBlock Text="{Binding DailyForecast.Temperature.Minimum.Value}" Margin="5"/>
+						<TextBlock Text="{Binding Description}"></TextBlock>
+					</WrapPanel>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 </UserControl>
