@@ -13,6 +13,9 @@ namespace SimpleWeather
 			CurrentViewModel.DisplayMessageHandler += OnDisplayError;
 		}
 
+		private const string DayBackgroundPath = @"Images/background_day.png";
+		private const string NightBackgroundPath = @"Images/background_night.png";
+
 		private void OnDisplayError(object sender, DisplayMessageEventArgs e)
 		{
 			Error = e.Message;
@@ -33,5 +36,7 @@ namespace SimpleWeather
 				OnPropertyChanged(nameof(Error));
 			}
 		}
+
+		public string BackgroundPath => CurrentViewModel.CurrentConditions.IsDayTime ? DayBackgroundPath : NightBackgroundPath;
 	}
 }

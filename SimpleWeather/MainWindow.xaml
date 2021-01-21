@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleWeather"
         mc:Ignorable="d"
-        Title="Weather" Height="450" Width="800">
+        Title="Weather" Height="450" Width="800" MinHeight="600" MinWidth="600">
 
 	<Window.DataContext>
 		<local:MainWindowViewModel/>
@@ -15,8 +15,13 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="0.2*"/>
+			<RowDefinition Height="0.05*"/>
 		</Grid.RowDefinitions>
+
+		<Grid.Background>
+		<ImageBrush ImageSource="{Binding BackgroundPath}" Stretch="UniformToFill"/>
+		</Grid.Background>
+	
 		<Label Grid.Row="0" Content="{Binding Error}"></Label>
 		<ContentControl Grid.Row="1"  Content="{Binding CurrentViewModel}"></ContentControl>
 		<Image Grid.Row="2" 
