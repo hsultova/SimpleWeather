@@ -61,8 +61,9 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Managers\Abstract\IWeatherAPI.cs" />
     <Compile Include="Managers\AccuWeatherApiManager.cs" />
+    <Compile Include="Models\CurrentConditions.cs" />
     <Compile Include="Models\DailyForecast.cs" />
-    <Compile Include="Models\DailyForecastOneDay.cs" />
+    <Compile Include="Models\DailyForecastDays.cs" />
     <Compile Include="Models\ForecastView.cs" />
     <Compile Include="Models\Headline.cs" />
     <Compile Include="Models\Temperature.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Utils\Events\DisplayMessage.cs" />
     <Compile Include="Utils\General\RelayCommand.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DailyForecastViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
     <Compile Include="Views\ForecastView.xaml.cs">
       <DependentUpon>ForecastView.xaml</DependentUpon>
@@ -164,6 +166,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\accuweather.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background_day.png" />
+    <Resource Include="Images\background_night.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
