@@ -13,32 +13,33 @@ namespace SimpleWeather.Managers
 		private const string BaseUrl = @"http://dataservice.accuweather.com";
 		private const string AutoCompleteEndpoint = @"/locations/v1/cities/autocomplete?apikey={0}&q={1}";
 		private const string DailyForecastsEndpoint = @"/forecasts/v1/daily/1day/{0}?apikey={1}";
+		private const string CurrentConditionsEndpoint = @"/currentconditions/v1/{0}?apikey={1}";
+		private const string DailyForecastsFiveDays = @"/forecasts/v1/daily/5day/{0}?apikey={1}&metric=true";
 
-		/// <summary>
-		/// Gets cities by query string
-		/// </summary>
-		/// <param name="query">Name of the city</param>
-		/// <returns>Returns all the cities with that or similar name</returns>
-		public async Task<HttpResponseMessage> GetCities(string query)
+		public string GetCitiesUrl(string query)
 		{
-			using (var client = new HttpClient())
-			{
-				string url = BaseUrl + string.Format(AutoCompleteEndpoint, APIKey, query);
-				var response = await client.GetAsync(url);
-				return response;
-			}
+			return BaseUrl + string.Format(AutoCompleteEndpoint, APIKey, query);
 		}
 
-		/// <summary>
-		/// Gets one day of daily forecast data for a specific location
-		/// </summary>
-		/// <param name="key">Location key</param>
-		/// <returns>Returns daily forecast data for a specific location</returns>
-		public async Task<HttpResponseMessage> GetDailyForecastOneDay(string key)
+		public string GetDailyForecastOneDayUrl(string key)
+		{
+			return BaseUrl + string.Format(DailyForecastsEndpoint, key, APIKey);
+		}
+
+		public string GetDailyForecastFiveDaysUrl(string key)
+		{
+			return BaseUrl + string.Format(DailyForecastsFiveDays, key, APIKey);
+		}
+
+		public string GetCurrentConditionsUrl(string key)
+		{
+			return BaseUrl + string.Format(CurrentConditionsEndpoint, key, APIKey);
+		}
+
+		public async Task<HttpResponseMessage> GetRequest(string url)
 		{
 			using (var client = new HttpClient())
 			{
-				string url = BaseUrl + string.Format(DailyForecastsEndpoint, key, APIKey);
 				var response = await client.GetAsync(url);
 				return response;
 			}
