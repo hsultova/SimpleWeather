@@ -2,7 +2,7 @@
 
 namespace SimpleWeather.Models
 {
-	public class DailyForecastOneDay
+	public class DailyForecastDays
 	{
 		public Headline Headline { get; set; }
 		public List<DailyForecast> DailyForecasts { get; set; }
