@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SimpleWeather.Resources.Themes">
+
+	<!--Images-->
+	<BitmapImage x:Key="BackgroundImage" UriSource="/Images/background_day.png"/>
+	<BitmapImage x:Key="SearchImage" UriSource="/Images/search_black.png"/>
+
+	<!--Colors-->
+	<Color x:Key="BorderBackgroundColor">#c6d8e1</Color>
+	<Color x:Key="SearchTextBoxBorderColor">#a8c3d1</Color>
+	<Color x:Key="SearchTextBoxBackgroundColor">#e5eef5</Color>
+	<Color x:Key="SearchTextBoxForegroundColor">#070e12</Color>
+	<Color x:Key="SearchTextBoxBorderBackgroundColor">#b6ccd8</Color>
+	<Color x:Key="SearchTextBoxCaretColor">#8d3535</Color>
+	<Color x:Key="SearchTextBoxSelectionColor">#2c566d</Color>
+	<Color x:Key="FontForegroundColor">#070e12</Color>
+	<Color x:Key="SearchButtonOnHoverBackgroundColor">#388bb7</Color>
+
+	<SolidColorBrush x:Key="BorderBackground" Color="{DynamicResource BorderBackgroundColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxBackground" Color="{DynamicResource SearchTextBoxBackgroundColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxForeground" Color="{DynamicResource SearchTextBoxForegroundColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxBorder"  Color="{DynamicResource SearchTextBoxBorderColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxBorderBackground"  Color="{DynamicResource SearchTextBoxBorderBackgroundColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxCaret"  Color="{DynamicResource SearchTextBoxCaretColor}"/>
+	<SolidColorBrush x:Key="SearchTextBoxSelection"  Color="{DynamicResource SearchTextBoxSelectionColor}"/>
+	<SolidColorBrush x:Key="FontForeground"  Color="{DynamicResource FontForegroundColor}"/>
+	<SolidColorBrush x:Key="SearchButtonOnHoverBackground"  Color="{DynamicResource SearchButtonOnHoverBackgroundColor}"/>
+
+</ResourceDictionary>

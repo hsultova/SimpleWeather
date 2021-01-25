@@ -61,6 +61,7 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Managers\Abstract\IWeatherAPI.cs" />
     <Compile Include="Managers\AccuWeatherApiManager.cs" />
+    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Models\CurrentConditions.cs" />
     <Compile Include="Models\DailyForecast.cs" />
     <Compile Include="Models\DailyForecastDays.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\TemperatureScale.cs" />
     <Compile Include="Utils\Events\DisplayMessage.cs" />
     <Compile Include="Utils\General\RelayCommand.cs" />
+    <Compile Include="Utils\WeatherAPIHttpResponse.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\DailyForecastViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
@@ -88,6 +90,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Styles\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TextBlockStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TextBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\DayTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themes\NightTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ForecastView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,7 +190,8 @@
     <Resource Include="Images\accuweather.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Images\search_black.png" />
+    <Resource Include="Images\search_white.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background_day.png" />
