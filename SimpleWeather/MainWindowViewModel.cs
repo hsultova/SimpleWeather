@@ -13,11 +13,9 @@ namespace SimpleWeather
 			CurrentViewModel.DisplayMessageHandler += OnDisplayError;
 		}
 
-		private const string DayBackgroundPath = @"Images/background_day.png";
-		private const string NightBackgroundPath = @"Images/background_night.png";
-
 		private void OnDisplayError(object sender, DisplayMessageEventArgs e)
 		{
+			//TODO Handle more error message, not only the last. Display messages better.
 			Error = e.Message;
 		}
 
@@ -37,6 +35,6 @@ namespace SimpleWeather
 			}
 		}
 
-		public string BackgroundPath => CurrentViewModel.CurrentConditions.IsDayTime ? DayBackgroundPath : NightBackgroundPath;
+		public object BackgroundPath => App.Current.FindResource("BackgroundImage");
 	}
 }

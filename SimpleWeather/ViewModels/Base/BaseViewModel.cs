@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using SimpleWeather.Utils.Events;
-using SimpleWeather.Utils.General;
 
 namespace SimpleWeather.ViewModels.Base
 {

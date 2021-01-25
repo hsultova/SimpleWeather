@@ -1,8 +1,10 @@
-﻿using SimpleWeather.Models;
+﻿using System.Globalization;
+using SimpleWeather.Models;
+using SimpleWeather.ViewModels.Base;
 
 namespace SimpleWeather.ViewModels
 {
-	public class DailyForecastViewModel
+	public class DailyForecastViewModel : BaseViewModel
 	{
 		public DailyForecastViewModel(DailyForecast model, CurrentConditions conditions)
 		{
@@ -12,6 +14,8 @@ namespace SimpleWeather.ViewModels
 
 		private CurrentConditions _currentConditions;
 		public DailyForecast DailyForecast { get; set; }
+
+		public string DailyForecastDate => DailyForecast.Date.ToString("ddd d", CultureInfo.InvariantCulture);
 
 		public string IconPath
 		{
