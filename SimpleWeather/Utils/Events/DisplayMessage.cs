@@ -2,7 +2,7 @@
 {
 	public enum DisplayMessageType
 	{
-		Non,
+		None,
 		Error,
 		Info
 	}

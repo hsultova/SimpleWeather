@@ -15,7 +15,7 @@ namespace SimpleWeather
 
 		private void OnDisplayError(object sender, DisplayMessageEventArgs e)
 		{
-			//TODO Handle more error message, not only the last. Display messages better.
+			//TODO Handle more error messages, not only the last. Display messages better.
 			Error = e.Message;
 		}
 
